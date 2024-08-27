@@ -23,7 +23,7 @@ with open("./data/task-data/test-ClosedDomainQA.jsonl", "r+", encoding="utf8") a
         answers = data['answer']
         generation_prompts = [f"Please answer the given question based on the passage. The answer should be exact 'yes' or 'no'. passage: {passage} question: {question}. answer:"]
         # model = AutoModelForCausalLM.from_pretrained('./hugging_cache/gpt2-xl').to('cuda')
-        batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+        batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
 
         outputs = model.generate(
             input_ids=batch['input_ids'].to('cuda'),

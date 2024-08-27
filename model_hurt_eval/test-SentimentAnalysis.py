@@ -30,7 +30,7 @@ with open('./data/task-data/test-SentimentAnalysis.tsv') as f:
     for j in tqdm(range(len(generation_prompts_list)), desc=f'{args.task} evaluation'):
         result = open(f"./test-result/test-SentimentAnalysis/result-SentimentAnalysis-{args.base_model}-{args.eval_name}.txt", "a", encoding="utf8")
         # model = GPT2LMHeadModel.from_pretrained('./hugging_cache/gpt2-xl').to('cuda')
-        batch = tokenizer(generation_prompts_list[j], return_tensors='pt', padding="max_length")
+        batch = tokenizer(generation_prompts_list[j], return_tensors='pt', padding=True)
 
         outputs = model.generate(
             input_ids=batch['input_ids'].to('cuda'),

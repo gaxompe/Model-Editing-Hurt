@@ -32,7 +32,7 @@ for i in tqdm(range(len(dialogue)), desc=f'{args.task} evaluation'):
     result = open(f"./test-result/test-summarization/result-summarization-{args.base_model}-{args.eval_name}.txt", "a", encoding="utf8")
     generation_prompts = [f"{dialogue[i]}\nTL;DR:"]
     # model = GPT2LMHeadModel.from_pretrained('./hugging_cache/gpt2-xl').to('cuda')
-    batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+    batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
 
     outputs = model.generate(
         input_ids=batch['input_ids'].to('cuda'),

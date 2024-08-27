@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TASK=summarization #SentimentAnalysis #reasoning #OpenDomainQA #NLI #NER #dialogue #ClosedDomainQA
+TASK=NER #summarization #SentimentAnalysis #reasoning #OpenDomainQA #NLI #NER #dialogue #ClosedDomainQA
 POST_EDIT_FLAG="" #"--post_edit" # empty string for model without editing
 EVAL_NAME="base-testing"
 

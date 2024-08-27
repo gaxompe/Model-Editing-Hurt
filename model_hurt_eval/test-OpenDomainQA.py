@@ -51,7 +51,7 @@ with open("./data/task-data/test-OpenDomainQA.jsonl", "r+", encoding="utf8") as 
         answer = data['answer']
         generation_prompts = [f"Refer to the passage below and answer the following question. Passage: {document[0]} Question: {question}"]
         # model = GPT2LMHeadModel.from_pretrained('./hugging_cache/gpt2-xl').to('cuda')
-        batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+        batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
 
         outputs = model.generate(
             input_ids=batch['input_ids'].to('cuda'),

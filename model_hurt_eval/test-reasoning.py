@@ -21,7 +21,7 @@ with open("./data/task-data/test-reasoning.jsonl", "r+", encoding="utf8") as f:
         generation_prompts = [f"Q: {question} A:Let's think step by step. {hint} Therefore, the answer (arabic numerals) is:"]
         answers = answers.split("#### ")[1]
         # model = GPT2LMHeadModel.from_pretrained('./hugging_cache/gpt2-xl').to('cuda')
-        batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+        batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
 
         outputs = model.generate(
             input_ids=batch['input_ids'].to('cuda'),

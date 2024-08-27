@@ -123,7 +123,9 @@ for j in tqdm(range(len(valid_sentences)), desc=f'{args.task} evaluation'):
     result.write("\n")
     generation_prompts = [f"Please identify Person Entity from the given text. Text: {sentence[1:]} Entity:"]
     # model = GPT2LMHeadModel.from_pretrained('./hugging_cache/gpt2-xl').to('cuda')
-    batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+    batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
+    print(f"the length of the generation prompt: {len(batch['input_ids'][0])}")
+    print(f"the length of the attention mask: {len(batch['attention_mask'][0])}")
     outputs = model.generate(
         input_ids=batch['input_ids'].to('cuda'),
         attention_mask=batch['attention_mask'].to('cuda'),
@@ -147,7 +149,7 @@ for j in tqdm(range(len(valid_sentences)), desc=f'{args.task} evaluation'):
         result.write(loc[m2] + "\t")
     result.write("\n")
     generation_prompts = [f"Please identify Location Entity from the given text. Text: {sentence[1:]} Entity:"]
-    batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+    batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
     outputs = model.generate(
         input_ids=batch['input_ids'].to('cuda'),
         attention_mask=batch['attention_mask'].to('cuda'),
@@ -171,7 +173,7 @@ for j in tqdm(range(len(valid_sentences)), desc=f'{args.task} evaluation'):
         result.write(org[m3] + "\t")
     result.write("\n")
     generation_prompts = [f"Please identify Organization Entity from the given text. Text: {sentence[1:]} Entity:"]
-    batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+    batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
     outputs = model.generate(
         input_ids=batch['input_ids'].to('cuda'),
         attention_mask=batch['attention_mask'].to('cuda'),
@@ -195,7 +197,7 @@ for j in tqdm(range(len(valid_sentences)), desc=f'{args.task} evaluation'):
         result.write(misc[m4] + "\t")
     result.write("\n")
     generation_prompts = [f"Please identify Miscellaneous Entity from the given text. Text: {sentence[1:]} Entity:"]
-    batch = tokenizer(generation_prompts, return_tensors='pt', padding="max_length")
+    batch = tokenizer(generation_prompts, return_tensors='pt', padding=True)
     outputs = model.generate(
         input_ids=batch['input_ids'].to('cuda'),
         attention_mask=batch['attention_mask'].to('cuda'),
