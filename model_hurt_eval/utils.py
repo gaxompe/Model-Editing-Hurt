@@ -44,9 +44,23 @@ parser = get_arg_parser()
 #3. custom loader that 'imports' the edited weights produced by MEMIT
 import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
+
+def load_edited_weights(model, edited_weights_path):
+    edited_layers = torch.load(edited_weights_path)
+    edited_states = model.state_dict()
+    for i in edited_layers.keys():
+        edited_states[f"{i}.weight"] = edited_layers[i]
+    model.load_state_dict(edited_states)
+    model.eval()
+    del edited_layers
+    torch.cuda.empty_cache()
+    return model
+
 def get_model_and_tokenizer(args):
     tokenizer = AutoTokenizer.from_pretrained(args.base_model)
     tokenizer.pad_token_id = tokenizer.eos_token_id
     tokenizer.padding_side = 'left'
     model = AutoModelForCausalLM.from_pretrained(args.base_model).to('cuda')
+    if args.post_edit:
+        model = load_edited_weights(model, edited_weights_path=args.edited_weights_path)
     return model, tokenizer
