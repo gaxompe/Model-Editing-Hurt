@@ -32,11 +32,11 @@ TASKS = [
 
 def get_arg_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--post_edit',           action='store_true', help="")
-    parser.add_argument('--task',                choices=TASKS,       help="")
-    parser.add_argument('--eval_name',                                help="")
-    parser.add_argument('--base_model',                               help="")
-    parser.add_argument('--edited_weights_path', default=None,        help="")
+    parser.add_argument('--post_edit',           action='store_true', help="Flag indicating if the model to evaluate has been edited.")
+    parser.add_argument('--task',                choices=TASKS,       help=f"The task to evaluate.")
+    parser.add_argument('--eval_name',                                help="The name of the evaluation used to rename the result file.")
+    parser.add_argument('--base_model',                               help="The name of the base model to evaluate.")
+    parser.add_argument('--edited_weights_path', default=None,        help="The path of the pt checkpoint containing the edited weigths for a post-edit evaluation.")
     return parser
 parser = get_arg_parser()
 
