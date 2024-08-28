@@ -66,7 +66,7 @@ for i in tqdm(range(len(dialogue)), desc=f'{args.task} evaluation'):
         result.write(str(rouge_score) + "\n")
         rouge_score_total = rouge_score_total + rouge_score
     result.close()
-    if i>20: break
+
 
 result = open(f"./test-result/test-summarization/result-summarization-{args.base_model}-{args.eval_name}.txt", "a", encoding="utf8")
 # result.write(str(bleu_score_total / 818) + "\t")
